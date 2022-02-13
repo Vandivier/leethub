@@ -158,7 +158,9 @@ LRUCache.prototype.get = function(key) {
  * @return {void}
  */
 LRUCache.prototype.put = function(key, value) {
-    refreshKeyInQueue(this._orderedMap, key, value);
+    this._orderedMap.delete(key);
+    this._orderedMap.set(key, value);
+    // refreshKeyInQueue(this._orderedMap, key, value);
 //     if (this._orderedMap.has(key)) {
         
 //     } else {
