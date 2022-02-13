@@ -158,14 +158,16 @@ LRUCache.prototype.get = function(key) {
  * @return {void}
  */
 LRUCache.prototype.put = function(key, value) {
+    // micro-optimzation 1: set doesn't throw if u delete key that doesn't exist
     this._orderedMap.delete(key);
     this._orderedMap.set(key, value);
-    // refreshKeyInQueue(this._orderedMap, key, value);
-//     if (this._orderedMap.has(key)) {
-        
-//     } else {
-//         this._orderedMap.set(key, value);
-//     }
+
+    // block below optimized by micro-optimization 1
+    // if (this._orderedMap.has(key)) {
+    //     refreshKeyInQueue(this._orderedMap, key, value);
+    // } else {
+    //     this._orderedMap.set(key, value);
+    // }
 
     // evict if needed
     if (this._orderedMap.size > this._capacity) {
