@@ -44,8 +44,6 @@ function addTwoNumbers(l1: ListNode, l2: ListNode): ListNode {
         }
     }
 
-    // technically i could delete l1 and l2 from memory at this point
-    // IS THIS O(-N) memory usage???
     if (shouldCarry) {
         currResult.next = new ListNode(1, null);
     }
