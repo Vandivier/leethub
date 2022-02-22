@@ -18,14 +18,26 @@ var Solution = function(w) {
  */
 Solution.prototype.pickIndex = function() {
     const target = Math.random()*this.lastAccumulatedSum;
+    let left = 0;
+    let right = this.accumulatedSums.length - 1;
     
-    for (let i = 0; i < this.accumulatedSums.length; i++) {
-        if (target < this.accumulatedSums[i]) {
-            return i;
+    // for (let i = 0; i < this.accumulatedSums.length; i++) {
+    //     if (target < this.accumulatedSums[i]) {
+    //         return i;
+    //     }
+    // }
+    
+    // binary search to find where target < this.accumulatedSums[i]
+    while (left < right) {
+        let mid = Math.floor(left + ((right - left) / 2));
+        if (target > this.accumulatedSums[mid]) {
+            left = mid + 1;
+        } else {
+            right = mid;
         }
     }
-    // if you get this far there's a problem
-    return -1;
+
+    return left;
 };
 
 /** 
