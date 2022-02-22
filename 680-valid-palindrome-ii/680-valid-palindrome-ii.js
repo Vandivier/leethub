@@ -6,6 +6,13 @@
  * @return {boolean}
  */
 
+// TODO: try es6
+var validPalindrome = function(s) {
+    // two pointers approach
+    let left = 0;
+    let right = s.length - 1;
+    
+
 var validPalindromeAfterRemovingChar = function(s, left, right) {
     while (left < right) {
         if (s[left] !== s[right]) {
@@ -18,12 +25,6 @@ var validPalindromeAfterRemovingChar = function(s, left, right) {
 
     return true;
 }
-
-// TODO: try es6
-var validPalindrome = function(s) {
-    // two pointers approach
-    let left = 0;
-    let right = s.length - 1;
     
     // ordinary palindrome check
     while (left < right) {
