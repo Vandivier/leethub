@@ -66,10 +66,12 @@ var mergeKLists = function(lists) {
     let interval = 1;
 
     while (lists.length > interval) {
-        for (let i = 0; interval < lists.length; i+=interval) {
-            const toMerge = lists.splice(1, 1);
-            const result = mergeSortTwoLists(lists[0], toMerge[0])
-            lists[0] = result
+        // for (let i = 0; i < lists.length; i+=interval) {
+        for (let i = 0; i < lists.length; i++) {
+            const toMerge = lists.splice(i+1, 1);
+            // lists[i] = mergeSortTwoLists(lists[i], lists[i+interval])
+            const result = mergeSortTwoLists(lists[i], toMerge[0])
+            lists[i] = result
 
             // // splice out array containing linkedList
             // const toMerge = lists.splice(i+interval, 1);
@@ -79,8 +81,8 @@ var mergeKLists = function(lists) {
             // // lists[i] = result
         }
 
-        interval *=2;
+        // interval *=2;
     }
 
-    return lists.length === 0 ? null : lists[0];
+    return lists.length === 0 ? null : lists[0] || null;
 };
