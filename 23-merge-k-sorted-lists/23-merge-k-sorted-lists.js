@@ -59,7 +59,7 @@ const mergeSortTwoLists = (l1, l2) => {
  */
 var mergeKLists = function(lists) {
     // start by merging lists together one at a time
-    // if we have time implement binary search
+    // if we have time implement binary interval merge
     // we will want to make sure lists themselves are sorted by starting index
     // then use mergesort
     // repeat until a single list is left
