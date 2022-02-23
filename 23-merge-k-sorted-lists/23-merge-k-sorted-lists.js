@@ -36,6 +36,25 @@ const mergeSortTwoLists = (l1, l2) => {
  * @param {ListNode[]} lists
  * @return {ListNode}
  */
+var mergeKListsLinear = function(lists) {
+    // start by merging lists together one at a time
+    // if we have time implement binary interval merge
+    // we will want to make sure lists themselves are sorted by starting index
+    // then use mergesort
+    // repeat until a single list is left
+    // this is bullshit: can use bfs > dfs for no change in time complexity, but reduce mem complexity
+    // target space complexity should be constant O(1)
+    while (lists.length > 1) {
+        // splice out array containing linkedList
+        const toMerge = lists.splice(1, 1);
+        const result = mergeSortTwoLists(lists[0], toMerge[0])
+        lists[0] = result
+    }
+
+    return lists.length === 0 ? null : lists[0];
+};
+
+// this impl uses binary interval merge
 var mergeKLists = function(lists) {
     // start by merging lists together one at a time
     // if we have time implement binary interval merge
@@ -44,12 +63,17 @@ var mergeKLists = function(lists) {
     // repeat until a single list is left
     // this is bullshit: can use bfs > dfs for no change in time complexity, but reduce mem complexity
     // target space complexity should be constant O(1)
+    let interval = 1;
 
-    while (lists.length > 1) {
-        // splice out array containing linkedList
-        const toMerge = lists.splice(1, 1);
-        const result = mergeSortTwoLists(lists[0], toMerge[0])
-        lists[0] = result
+    while (lists.length > interval) {
+        for (let i = 0; interval < lists.length; i+=interval) {
+            // splice out array containing linkedList
+            const toMerge = lists.splice(1, 1);
+            const result = mergeSortTwoLists(lists[0], toMerge[0])
+            lists[0] = result
+        }
+
+        interval *=2;
     }
 
     return lists.length === 0 ? null : lists[0];
