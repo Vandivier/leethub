@@ -67,10 +67,16 @@ var mergeKLists = function(lists) {
 
     while (lists.length > interval) {
         for (let i = 0; interval < lists.length; i+=interval) {
-            // splice out array containing linkedList
             const toMerge = lists.splice(1, 1);
             const result = mergeSortTwoLists(lists[0], toMerge[0])
             lists[0] = result
+
+            // // splice out array containing linkedList
+            // const toMerge = lists.splice(i+interval, 1);
+            // const result = mergeSortTwoLists(lists[i], toMerge[i])
+            // lists[i] = result
+            // // const result = mergeSortTwoLists(lists[i], lists[i+1])
+            // // lists[i] = result
         }
 
         interval *=2;
