@@ -84,5 +84,5 @@ var mergeKLists = function(lists) {
         // interval *=2;
     }
 
-    return lists.length === 0 ? null : lists[0] || null;
+    return lists[0] || null;
 };
