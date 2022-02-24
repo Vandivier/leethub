@@ -54,21 +54,23 @@ var mergeKListsLinear = function(lists) {
 };
 
 // for some reason, for loop wrapped in while is much faster than while loop alone?
-var mergeKListsLinearFast = function(lists) {
-    while (lists.length > 1) {
+var mergeKLists = function(lists) {
+    // while (lists.length > 1) {
         for (let i = 0; i < lists.length; i++) {
-            const toMerge = lists.splice(i+1, 1);
-            lists[i] = mergeSortTwoLists(lists[i], toMerge[0])
+            // const toMerge = lists.splice(i+1, 1);
+            // lists[i] = mergeSortTwoLists(lists[i], toMerge[0])
+            // const toMerge = lists.splice(i+1, 1);
+            lists[0] = mergeSortTwoLists(lists[0], lists[i+1])
         }
-    }
+    // }
 
     return lists[0] || null;
 };
 
 // binary interval merge / divide and conquer without splicing
 // (similar to official python solution)
-// var mergeKListsIntervalMergeNoSplice = function(lists) {
-var mergeKLists = function(lists) {
+var mergeKListsIntervalMergeNoSplice = function(lists) {
+// var mergeKLists = function(lists) {
     let interval = 1;
 
     while (lists.length > interval) {
