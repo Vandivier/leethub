@@ -49,8 +49,10 @@ var mergeKLists = function(lists) {
     while (lists.length > 1) {
         for (let i = 0; i < lists.length; i++) {
             // splice out array containing linkedList
-            const toMerge = lists.splice(1, 1);
-            lists[0] = mergeSortTwoLists(lists[0], toMerge[0])
+            // const toMerge = lists.splice(1, 1);
+            // lists[0] = mergeSortTwoLists(lists[0], toMerge[0])
+            const toMerge = lists.splice(i+1, 1);
+            lists[i] = mergeSortTwoLists(lists[i], toMerge[0])
         }
     }
 
