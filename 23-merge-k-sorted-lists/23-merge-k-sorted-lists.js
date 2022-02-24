@@ -36,34 +36,34 @@ const mergeSortTwoLists = (l1, l2) => {
  * @param {ListNode[]} lists
  * @return {ListNode}
  */
-var mergeKListsLinear = function(lists) {
-    // start by merging lists together one at a time
-    // if we have time implement binary interval merge
-    // we will want to make sure lists themselves are sorted by starting index
-    // then use mergesort
-    // repeat until a single list is left
-    // target space complexity should be constant O(1)
+// var mergeKListsLinear = function(lists) {
+//     // start by merging lists together one at a time
+//     // if we have time implement binary interval merge
+//     // we will want to make sure lists themselves are sorted by starting index
+//     // then use mergesort
+//     // repeat until a single list is left
+//     // target space complexity should be constant O(1)
 
-    while (lists.length > 1) {
-        // splice out array containing linkedList
-        const toMerge = lists.splice(1, 1);
-        lists[0] = mergeSortTwoLists(lists[0], toMerge[0])
-    }
+//     while (lists.length > 1) {
+//         // splice out array containing linkedList
+//         const toMerge = lists.splice(1, 1);
+//         lists[0] = mergeSortTwoLists(lists[0], toMerge[0])
+//     }
 
-    return lists[0] || null;
-};
+//     return lists[0] || null;
+// };
 
-// for some reason, for loop wrapped in while is much faster than while loop alone?
-var mergeKListsLinearFast = function(lists) {
-    while (lists.length > 1) {
-        for (let i = 0; i < lists.length; i++) {
-            const toMerge = lists.splice(i+1, 1);
-            lists[i] = mergeSortTwoLists(lists[i], toMerge[0])
-        }
-    }
+// // for some reason, for loop wrapped in while is much faster than while loop alone?
+// var mergeKListsLinearFast = function(lists) {
+//     while (lists.length > 1) {
+//         for (let i = 0; i < lists.length; i++) {
+//             const toMerge = lists.splice(i+1, 1);
+//             lists[i] = mergeSortTwoLists(lists[i], toMerge[0])
+//         }
+//     }
 
-    return lists[0] || null;
-};
+//     return lists[0] || null;
+// };
 
 // binary interval merge / divide and conquer without splicing
 // (similar to official python solution)
