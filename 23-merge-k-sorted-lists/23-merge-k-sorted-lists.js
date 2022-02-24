@@ -36,7 +36,7 @@ const mergeSortTwoLists = (l1, l2) => {
  * @param {ListNode[]} lists
  * @return {ListNode}
  */
-var mergeKLists = function(lists) {
+var mergeKListsLinear = function(lists) {
     // start by merging lists together one at a time
     // if we have time implement binary interval merge
     // we will want to make sure lists themselves are sorted by starting index
@@ -54,7 +54,7 @@ var mergeKLists = function(lists) {
 };
 
 // for some reason, for loop is much faster than while loop?
-var mergeKListsFastLinear = function(lists) {
+var mergeKLists = function(lists) {
     while (lists.length > 1) {
         for (let i = 0; i < lists.length; i++) {
             const toMerge = lists.splice(i+1, 1);
