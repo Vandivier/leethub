@@ -65,25 +65,9 @@ var mergeKListsLinearFast = function(lists) {
     return lists[0] || null;
 };
 
-// this impl uses binary interval merge (divide and conquer)
-// somehow it's kind of slow? maybe bc of the test cases used by leetcode?
-var mergeKListsSplicedIntervalMerge = function(lists) {
-    let interval = 1;
-
-    while (lists.length > interval) {
-        for (let i = 0; i < (lists.length - interval); i*=interval) {
-            const toMerge = lists.splice(i+1, 1);
-            lists[i] = mergeSortTwoLists(lists[i], toMerge[0])
-        }
-
-        interval *=2;
-    }
-
-    return lists[0] || null;
-};
-
 // binary interval merge / divide and conquer without splicing
 // (similar to official python solution)
+// var mergeKListsIntervalMergeNoSplice = function(lists) {
 var mergeKLists = function(lists) {
     let interval = 1;
 
