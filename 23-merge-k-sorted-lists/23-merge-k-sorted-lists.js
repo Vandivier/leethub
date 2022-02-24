@@ -53,8 +53,8 @@ var mergeKListsLinear = function(lists) {
     return lists[0] || null;
 };
 
-// for some reason, for loop is much faster than while loop?
-var mergeKLists = function(lists) {
+// for some reason, for loop wrapped in while is much faster than while loop alone?
+var mergeKListsLinearFast = function(lists) {
     while (lists.length > 1) {
         for (let i = 0; i < lists.length; i++) {
             const toMerge = lists.splice(i+1, 1);
@@ -65,21 +65,35 @@ var mergeKLists = function(lists) {
     return lists[0] || null;
 };
 
-// this impl uses binary interval merge
-// var mergeKLists = function(lists) {
-//     let interval = 1;
+// this impl uses binary interval merge (divide and conquer)
+// somehow it's kind of slow? maybe bc of the test cases used by leetcode?
+var mergeKListsSplicedIntervalMerge = function(lists) {
+    let interval = 1;
 
-//     while (lists.length > interval) {
-//         for (let i = 0; i < (lists.length - interval); i*=interval) {
-//         // for (let i = 0; i < lists.length; i++) {
-//             const toMerge = lists.splice(i+1, 1);
-//             // lists[i] = mergeSortTwoLists(lists[i], lists[i+interval])
-//             lists[i] = mergeSortTwoLists(lists[i], toMerge[0])
-//         }
+    while (lists.length > interval) {
+        for (let i = 0; i < (lists.length - interval); i*=interval) {
+            const toMerge = lists.splice(i+1, 1);
+            lists[i] = mergeSortTwoLists(lists[i], toMerge[0])
+        }
 
-//         interval *=2;
-//     }
+        interval *=2;
+    }
 
-//     return lists[0] || null;
-//     // return lists.length === 0 ? null : lists[0];
-// };
+    return lists[0] || null;
+};
+
+// binary interval merge / divide and conquer without splicing
+// (similar to official python solution)
+var mergeKLists = function(lists) {
+    let interval = 1;
+
+    while (lists.length > interval) {
+        for (let i = 0; i < (lists.length - interval); i += (interval*2)) {
+            lists[i] = mergeSortTwoLists(lists[i], lists[i+interval])
+        }
+
+        interval *=2;
+    }
+
+    return lists[0] || null;
+};
