@@ -50,7 +50,7 @@ var mergeKLists = function(lists) {
         lists[0] = mergeSortTwoLists(lists[0], toMerge[0])
     }
 
-    return lists.length === 0 ? null : lists[0];
+    return lists[0] || null;
 };
 
 // this impl uses binary interval merge
