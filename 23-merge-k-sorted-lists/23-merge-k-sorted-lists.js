@@ -36,7 +36,7 @@ const mergeSortTwoLists = (l1, l2) => {
  * @param {ListNode[]} lists
  * @return {ListNode}
  */
-var mergeKListsLinear = function(lists) {
+var mergeKLists = function(lists) {
     // start by merging lists together one at a time
     // if we have time implement binary interval merge
     // we will want to make sure lists themselves are sorted by starting index
@@ -47,35 +47,34 @@ var mergeKListsLinear = function(lists) {
     while (lists.length > 1) {
         // splice out array containing linkedList
         const toMerge = lists.splice(1, 1);
-        const result = mergeSortTwoLists(lists[0], toMerge[0])
-        lists[0] = result
+        lists[0] = mergeSortTwoLists(lists[0], toMerge[0])
     }
 
     return lists.length === 0 ? null : lists[0];
 };
 
 // this impl uses binary interval merge
-var mergeKLists = function(lists) {
-    // start by merging lists together one at a time
-    // if we have time implement binary interval merge
-    // we will want to make sure lists themselves are sorted by starting index
-    // then use mergesort
-    // repeat until a single list is left
-    // this is bullshit: can use bfs > dfs for no change in time complexity, but reduce mem complexity
-    // target space complexity should be constant O(1)
-    let interval = 1;
+// var mergeKLists = function(lists) {
+//     // start by merging lists together one at a time
+//     // if we have time implement binary interval merge
+//     // we will want to make sure lists themselves are sorted by starting index
+//     // then use mergesort
+//     // repeat until a single list is left
+//     // this is bullshit: can use bfs > dfs for no change in time complexity, but reduce mem complexity
+//     // target space complexity should be constant O(1)
+//     let interval = 1;
 
-    while (lists.length > interval) {
-        for (let i = 0; i < (lists.length - interval); i*=interval) {
-        // for (let i = 0; i < lists.length; i++) {
-            const toMerge = lists.splice(i+1, 1);
-            // lists[i] = mergeSortTwoLists(lists[i], lists[i+interval])
-            lists[i] = mergeSortTwoLists(lists[i], toMerge[0])
-        }
+//     while (lists.length > interval) {
+//         for (let i = 0; i < (lists.length - interval); i*=interval) {
+//         // for (let i = 0; i < lists.length; i++) {
+//             const toMerge = lists.splice(i+1, 1);
+//             // lists[i] = mergeSortTwoLists(lists[i], lists[i+interval])
+//             lists[i] = mergeSortTwoLists(lists[i], toMerge[0])
+//         }
 
-        interval *=2;
-    }
+//         interval *=2;
+//     }
 
-    return lists[0] || null;
-    // return lists.length === 0 ? null : lists[0];
-};
+//     return lists[0] || null;
+//     // return lists.length === 0 ? null : lists[0];
+// };
