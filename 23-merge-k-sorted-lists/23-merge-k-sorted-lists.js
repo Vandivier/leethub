@@ -36,40 +36,25 @@ const mergeSortTwoLists = (l1, l2) => {
  * @param {ListNode[]} lists
  * @return {ListNode}
  */
-var mergeKListsLinear = function(lists) {
-    // start by merging lists together one at a time
-    // if we have time implement binary interval merge
-    // we will want to make sure lists themselves are sorted by starting index
-    // then use mergesort
-    // repeat until a single list is left
-    // this is bullshit: can use bfs > dfs for no change in time complexity, but reduce mem complexity
-    // target space complexity should be constant O(1)
-    
-    // for some reason, for loop is much faster than while loop?
-    while (lists.length > 1) {
-        for (let i = 0; i < lists.length; i++) {
-            // splice out array containing linkedList
-            
-            // const toMerge = lists.splice(1, 1);
-            // lists[0] = mergeSortTwoLists(lists[0], toMerge[0])
-            const toMerge = lists.splice(i+1, 1);
-            lists[i] = mergeSortTwoLists(lists[i], toMerge[0])
-        }
-    }
-
-    return lists[0] || null;
-};
-
 var mergeKLists = function(lists) {
     // start by merging lists together one at a time
     // if we have time implement binary interval merge
     // we will want to make sure lists themselves are sorted by starting index
     // then use mergesort
     // repeat until a single list is left
-    // this is bullshit: can use bfs > dfs for no change in time complexity, but reduce mem complexity
     // target space complexity should be constant O(1)
-    
-    // for some reason, for loop is much faster than while loop?
+
+    while (lists.length > 1) {
+        // splice out array containing linkedList
+        const toMerge = lists.splice(1, 1);
+        lists[0] = mergeSortTwoLists(lists[0], toMerge[0])
+    }
+
+    return lists[0] || null;
+};
+
+// for some reason, for loop is much faster than while loop?
+var mergeKListsFastLinear = function(lists) {
     while (lists.length > 1) {
         for (let i = 0; i < lists.length; i++) {
             const toMerge = lists.splice(i+1, 1);
@@ -82,13 +67,6 @@ var mergeKLists = function(lists) {
 
 // this impl uses binary interval merge
 // var mergeKLists = function(lists) {
-//     // start by merging lists together one at a time
-//     // if we have time implement binary interval merge
-//     // we will want to make sure lists themselves are sorted by starting index
-//     // then use mergesort
-//     // repeat until a single list is left
-//     // this is bullshit: can use bfs > dfs for no change in time complexity, but reduce mem complexity
-//     // target space complexity should be constant O(1)
 //     let interval = 1;
 
 //     while (lists.length > interval) {
