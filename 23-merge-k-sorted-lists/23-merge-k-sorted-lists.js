@@ -68,7 +68,8 @@ const mergeSortTwoLists = (l1, l2) => {
 // binary interval merge / divide and conquer without splicing
 // (similar to official python solution)
 // var mergeKListsIntervalMergeNoSplice = function(lists) {
-var mergeKLists = function(lists) {
+// var mergeKLists = function(lists) {
+const mergeKLists = (lists) => {
     let interval = 1;
 
     while (lists.length > interval) {
