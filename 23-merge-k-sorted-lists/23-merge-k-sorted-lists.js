@@ -44,10 +44,15 @@ var mergeKLists = function(lists) {
     // repeat until a single list is left
     // this is bullshit: can use bfs > dfs for no change in time complexity, but reduce mem complexity
     // target space complexity should be constant O(1)
+    
+    // for some reason, for loop is much faster than while loop?
     while (lists.length > 1) {
-        // splice out array containing linkedList
-        const toMerge = lists.splice(1, 1);
-        lists[0] = mergeSortTwoLists(lists[0], toMerge[0])
+        for (let i = 0; i < lists.length; i++) {
+
+            // splice out array containing linkedList
+            const toMerge = lists.splice(1, 1);
+            lists[0] = mergeSortTwoLists(lists[0], toMerge[0])
+        }
     }
 
     return lists[0] || null;
